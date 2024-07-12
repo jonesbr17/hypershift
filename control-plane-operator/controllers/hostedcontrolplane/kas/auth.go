@@ -91,6 +91,13 @@ func generateAuthConfig(spec *configv1.AuthenticationSpec, ctx context.Context, 
 				jwt.ClaimValidationRules = append(jwt.ClaimValidationRules, jwtRule)
 			}
 		}
+		for _, extra := range provider.ClaimMappings.Extra {
+			extraMapping := ExtraMapping{
+				Key: extra.Key,
+				ValueExpression: extra.ValueExpression,
+			}
+			jwt.ClaimMappings.Extra = append(jwt.ClaimMappings.Extra, extraMapping)
+		}
 		config.JWT = append(config.JWT, jwt)
 	}
 	return config, nil

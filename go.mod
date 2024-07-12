@@ -1,6 +1,8 @@
 module github.com/openshift/hypershift
 
-go 1.21
+go 1.22.0
+
+toolchain go1.22.5
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.11.1
@@ -73,9 +75,9 @@ require (
 	google.golang.org/grpc v1.63.2
 	gopkg.in/ini.v1 v1.67.0
 	gopkg.in/yaml.v2 v2.4.0
-	k8s.io/api v0.29.3
+	k8s.io/api v0.30.1
 	k8s.io/apiextensions-apiserver v0.29.3
-	k8s.io/apimachinery v0.29.3
+	k8s.io/apimachinery v0.30.1
 	k8s.io/apiserver v0.29.3
 	k8s.io/cli-runtime v0.29.3
 	k8s.io/client-go v0.29.3
@@ -253,6 +255,7 @@ require (
 
 replace (
 	github.com/google/cel-go => github.com/google/cel-go v0.17.7
+	github.com/openshift/api => github.com/jonesbr17/api v0.0.0-20240711142825-20e41581589a
 	github.com/openshift/hypershift/api => ./api
 )
 
