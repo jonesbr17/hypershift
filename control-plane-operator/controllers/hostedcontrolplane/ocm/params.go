@@ -57,6 +57,9 @@ func NewOpenShiftControllerManagerParams(hcp *hyperv1.HostedControlPlane, observ
 	params.DeploymentConfig.SetRestartAnnotation(hcp.ObjectMeta)
 	params.DeploymentConfig.SetDefaults(hcp, openShiftControllerManagerLabels(), nil)
 	params.DeploymentConfig.SetDefaultSecurityContext = setDefaultSecurityContext
+	if hcp.Spec.Platform.Type == hyperv1.IBMCloudPlatform {
+		params.DeploymentConfig.Replicas = 2
+	}
 
 	params.DeploymentConfig.LivenessProbes = config.LivenessProbes{
 		ocmContainerMain().Name: {

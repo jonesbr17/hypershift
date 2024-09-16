@@ -47,6 +47,9 @@ func NewClusterPolicyControllerParams(hcp *hyperv1.HostedControlPlane, releaseIm
 	params.DeploymentConfig.SetRestartAnnotation(hcp.ObjectMeta)
 	params.DeploymentConfig.SetDefaults(hcp, clusterPolicyControllerLabels, nil)
 	params.DeploymentConfig.SetDefaultSecurityContext = setDefaultSecurityContext
+	if hcp.Spec.Platform.Type == hyperv1.IBMCloudPlatform {
+		params.DeploymentConfig.Replicas = 2
+	}
 
 	params.OwnerRef = config.OwnerRefFrom(hcp)
 

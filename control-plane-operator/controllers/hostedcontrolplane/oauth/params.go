@@ -188,6 +188,7 @@ func NewOAuthServerParams(hcp *hyperv1.HostedControlPlane, releaseImageProvider 
 
 	if hcp.Spec.Platform.Type == hyperv1.IBMCloudPlatform {
 		p.OAuthNoProxy = append(p.OAuthNoProxy, "iam.cloud.ibm.com", "iam.test.cloud.ibm.com")
+		p.DeploymentConfig.Replicas = 2
 	}
 
 	return p

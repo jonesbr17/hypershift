@@ -108,6 +108,9 @@ func NewKubeControllerManagerParams(ctx context.Context, hcp *hyperv1.HostedCont
 	}
 	params.DeploymentConfig.SetDefaults(hcp, kcmLabels(), nil)
 	params.DeploymentConfig.SetRestartAnnotation(hcp.ObjectMeta)
+	if hcp.Spec.Platform.Type == hyperv1.IBMCloudPlatform {
+		params.DeploymentConfig.Replicas = 2
+	}
 
 	params.SetDefaultSecurityContext = setDefaultSecurityContext
 
