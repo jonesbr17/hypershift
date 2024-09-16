@@ -68,6 +68,9 @@ func NewKubeSchedulerParams(ctx context.Context, hcp *hyperv1.HostedControlPlane
 	}
 	params.DeploymentConfig.SetDefaults(hcp, labels, nil)
 	params.DeploymentConfig.SetRestartAnnotation(hcp.ObjectMeta)
+	if hcp.Spec.Platform.Type == hyperv1.IBMCloudPlatform {
+		params.DeploymentConfig.Replicas = 2
+	}
 	params.SetDefaultSecurityContext = setDefaultSecurityContext
 	params.DisableProfiling = util.StringListContains(hcp.Annotations[hyperv1.DisableProfilingAnnotation], manifests.SchedulerDeployment("").Name)
 
